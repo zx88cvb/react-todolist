@@ -6,7 +6,7 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: 'hello',
+      inputValue: '',
       list: []
     }
   }
@@ -19,10 +19,14 @@ class TodoList extends Component {
           <input 
           value={this.state.inputValue}
           onChange={this.handleInputChange.bind(this)} />
-          <button>按钮</button>
+          <button onClick={this.handleBtnClick.bind(this)}>按钮</button>
         </div>
         <ul>
-          <li>abc</li>
+            {
+              this.state.list.map((item, index) => {
+                return <li key={index} onClick={this.handleBtnDelete.bind(this, index)}>{item}</li>
+              })
+            }
         </ul>
       </Fragment>
     )
@@ -31,6 +35,21 @@ class TodoList extends Component {
   handleInputChange(e) {
     this.setState({
       inputValue: e.target.value
+    });
+  }
+
+  handleBtnClick() {
+    this.setState({
+      list: [...this.state.list, this.state.inputValue],
+      inputValue: ''
+    });
+  }
+
+  handleBtnDelete(index) {
+    const list = [...this.state.list];
+    list.splice(index, 1);
+    this.setState({
+      list
     });
   }
 }
