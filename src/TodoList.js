@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import TodoItem from './TodoItem'
 
 class TodoList extends Component {
 
@@ -13,8 +14,10 @@ class TodoList extends Component {
 
   render() {
     return (
-      // 外层div 替换Fragment 忽略掉
       <Fragment>
+        {
+          //外层div 替换Fragment 忽略掉
+        }
         <div>
           <input 
           value={this.state.inputValue}
@@ -24,7 +27,16 @@ class TodoList extends Component {
         <ul>
             {
               this.state.list.map((item, index) => {
-                return <li key={index} onClick={this.handleBtnDelete.bind(this, index)}>{item}</li>
+                return (
+                  <div>
+                  {/*
+                    <li key={index} onClick={this.handleBtnDelete.bind(this, index)}>{item}</li>
+                  */}
+                  <TodoItem content={item}
+                   index={index}
+                    deleteItem={this.handleBtnDelete.bind(this)}/>
+                  </div>
+                )
               })
             }
         </ul>
