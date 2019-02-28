@@ -8,6 +8,13 @@ class TodoItem extends Component{
     this.handleClick = this.handleClick.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.content === this.props.content) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const {test, content} = this.props;
     return(
